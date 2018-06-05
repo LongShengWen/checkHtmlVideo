@@ -131,14 +131,23 @@ class Excel(object):
 
     def __init__(self,excelPath = '/Users/liangTV/Desktop/check.xlsx',isGoON = '1'):
 
+        # 网页异常的原因
         self.reason = ''
+        # 待监测的Excel路径
         self.excelPath = excelPath
         self.readExcel(self.excelPath)
+        # 异常的条数
         self.exceptCount = 0
         self.sheetRowCount = 0
         self.isNormal = True
 
         global newFile
+        # 待保存的表单
+        self.cacheWriteSheet = None
+        # 读取到的单个Excel表单数据
+        # self.cacheReadSheet = None
+        # 读取到的Excel整个表单的数据
+        # self.cacheReadExcel = None
 
         if isGoON is '2':
 
@@ -150,12 +159,12 @@ class Excel(object):
 
             cacheFile = xlrd.open_workbook(oldPath)
             newFile = copy(cacheFile)
-            self.newSheet = newFile.get_sheet(0)
+            self.cacheWriteSheet = newFile.get_sheet(0)
 
         else:
 
             newFile = xlwt.Workbook()
-            self.newSheet = newFile.add_sheet(U'1')
+            self.cacheWriteSheet = newFile.add_sheet(U'1')
 
         self.readhtml = readHtml()
 
@@ -169,8 +178,8 @@ class Excel(object):
 
         else:
 
-            self.data = xlrd.open_workbook(path)
-            self.sheet = self.data.sheets()[0]
+            self.cacheReadExcel = xlrd.open_workbook(path)
+            self.cacheReadSheet = self.cacheReadExcel.sheets()[0]
 
     # 输出文件路径
     def printPath(self):
@@ -180,7 +189,7 @@ class Excel(object):
     #输出表格信息
     def printData(self):
 
-        table = self.data.sheets()[0]
+        table = self.cacheReadExcel.sheets()[0]
 
         nrows = table.nrows
 
@@ -190,7 +199,7 @@ class Excel(object):
 
                 continue
 
-            print(self.sheet.row_values[dataRow][2])
+            print(self.cacheReadSheet.row_values[dataRow][2])
     #检查网页内链接
     def checkVideoUrl(self,videoUrl):
 
@@ -229,7 +238,7 @@ class Excel(object):
     # 检查表格中的URL
     def checkUrl(self,beginRow = 0,stopRow = ''):
 
-        nrows = self.sheet.nrows
+        nrows = self.cacheReadSheet.nrows
 
         self.sheetRowCount = nrows
 
@@ -250,7 +259,7 @@ class Excel(object):
             if row == 0:
                 continue
 
-            dataRow = self.sheet.row_values(int(row))
+            dataRow = self.cacheReadSheet.row_values(int(row))
 
             url = dataRow[2]
 
@@ -339,12 +348,11 @@ class Excel(object):
 
             if self.isNormal == True:
 
-                self.newSheet.write(row, i, dataOne, self.setExcleNormalStyle())
+                self.cacheWriteSheet.write(row, i, dataOne, self.setExcleNormalStyle())
             else:
-                self.newSheet.write(row, i, dataOne, self.setExcleExceptStyle())
+                self.cacheWriteSheet.write(row, i, dataOne, self.setExcleExceptStyle())
 
             i = i + 1
-
         self.isNormal = True
 
     # 保存文件
@@ -403,6 +411,7 @@ if __name__ == '__main__':
 
     path = input('输入表格的路径:')
     isGoOn = input('是为是继上次检查:1 = 不是，2 = 是:')
+
     startRow = input('开始检查的行数:')
     stopRow = input('停止检查的行数:')
 
