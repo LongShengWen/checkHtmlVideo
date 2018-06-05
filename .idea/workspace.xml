@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e730cd14-a9c1-452f-8f3d-284ad212bb7a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/readXLSX.py" afterPath="$PROJECT_DIR$/readXLSX.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -290,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528192164005</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="更改变量的名字">
+      <created>1528193447594</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1528193447595</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -337,7 +343,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加加载网页时间可手动输入" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加加载网页时间可手动输入" />
+    <MESSAGE value="更改变量的名字" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改变量的名字" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
