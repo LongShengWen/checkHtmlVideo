@@ -34,8 +34,9 @@ class readHtml(object):
         driver = webdriver.Chrome()
         driver.get(url)
 
-        # 返回播放文件地址
-        time.sleep(0.5)
+        # 让程序休眠,等待网页彻底加载完成
+        time.sleep(sleepTime)
+
         page = driver.page_source
 
         try:
@@ -404,6 +405,12 @@ if __name__ == '__main__':
     isGoOn = input('是为是继上次检查:1 = 不是，2 = 是:')
     startRow = input('开始检查的行数:')
     stopRow = input('停止检查的行数:')
+
+    sleepTimeString = input('请输入加载网页的等待时间:')
+    if sleepTimeString is '':
+        sleepTimeString = '0'
+
+    sleepTime = float(sleepTimeString)
 
     try:
 
