@@ -102,6 +102,12 @@ class readHtml(object):
 
                 videoUrl = u.get('src')
 
+        elif url.startswith(r'http://zt.gxtv.cn/'):
+
+            tab = soup.find_all('video')
+            for u in tab:
+                videoUrl = u.get('src')
+                print('内部链接:' + videoUrl)
         else:
 
             tab = soup.find_all('source')
@@ -189,7 +195,7 @@ class Excel(object):
     #输出表格信息
     def printData(self):
 
-        table = self.cacheReadExcel.sheets()[0]
+        table = self.cacheReadExcel.sheets()[1]
 
         nrows = table.nrows
 
@@ -261,7 +267,7 @@ class Excel(object):
 
             dataRow = self.cacheReadSheet.row_values(int(row))
 
-            url = dataRow[2]
+            url = dataRow[1]
 
             print(url)
 
